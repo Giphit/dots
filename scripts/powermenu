@@ -1,0 +1,41 @@
+#!/bin/bash
+
+## Author : Aditya Shakya (adi1090x)
+## Mail : adi1090x@gmail.com
+## Github : @adi1090x
+## Reddit : @adi1090x
+
+rofi_command="rofi -theme /home/musa/.cache/wal/colors-rofi-dark.rasi -width 7 -lines 5 -location 3 -yoffset 45 -xoffset -10"
+
+
+# Options
+shutdown=" shutdown"
+reboot=" restart"
+lock=" lock"
+suspend=" sleep"
+logout=" logout"
+
+# Variable passed to rofi
+options="$lock\n$suspend\n$logout\n$reboot\n$shutdown"
+
+chosen="$(echo -e "$options" | $rofi_command -p "Power Menu" -dmenu -selected-row 0)"
+case $chosen in
+    $shutdown)
+        systemctl poweroff
+        ;;
+    $reboot)
+        systemctl reboot
+        ;;
+    $lock)
+        i3lock
+        ;;
+    $suspend)
+        mpc -q pause
+        amixer set Master mute
+        systemctl suspend
+        ;;
+    $logout)
+        i3-msg  exit || bspc quit
+        ;;
+esac
+

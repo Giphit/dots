@@ -1,0 +1,42 @@
+#! /bin/sh
+
+sxhkd &
+
+set-wallpaper
+
+/home/musa/.screenlayout/screens.sh
+bspc monitor HDMI-0 -d 1 2 3 4 5
+bspc monitor DVI-D-0 -d 6 7 8 9 10
+picom
+
+bspc config focus_follows_pointer true
+bspc config pointer_follows_monitor true
+
+bspc config border_width	2
+bspc config border_radius	12
+bspc config window_gap		7
+bspc config right_padding	17
+bspc config left_padding	16
+bspc config bottom_padding	17
+bspc config top_padding 	40
+
+bspc config split_ratio          0.50
+bspc config split_dir		vertical
+bspc config borderless_monocle   true
+bspc config gapless_monocle      true
+
+bspc rule -a Gimp desktop='^8' state=floating follow=on
+bspc rule -a firefox desktop='^1'
+bspc rule -a mplayer2 state=floating
+bspc rule -a Kupfer.py focus=on
+bspc rule -a Screenkey manage=off
+bspc rule -a Spotify desktop='^10'
+bspc rule -a discord desktop='^6'
+bspc rule -a Steam desktop='^3'
+bash /home/musa/.config/bspwm/game-desk-settings
+
+zsh $HOME/.config/polybar/launch-no-reset.sh
+middle-click-scroll
+pulseaudio-equalizer enable
+bash /home/musa/.config/bspwm/colours.sh
+

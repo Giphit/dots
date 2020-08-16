@@ -1,0 +1,350 @@
+
+[colors]
+background = ${xrdb:color0}
+foreground = ${xrdb:color7}
+active = ${xrdb:color6}
+inactive = ${xrdb:color3}
+highlight = ${xrdb:color3}
+error = ${xrdb:color2}
+
+[bar/bar1]
+monitor = HDMI-0
+width = 97.5%
+height = 32
+offset-x = 1.2%
+offset-y = 1%:-5
+;radius = 15.0
+fixed-center = true
+override-redirect = true
+border-size = 2
+border-color = ${colors.foreground}
+border-radius = 8.0
+wm-restack = bspwm
+
+background = ${colors.background}
+foreground = ${colors.foreground}
+
+line-size = 0
+label-line-color = #f00
+
+padding-left = 0 
+padding-right = 0
+
+module-margin-left = 0
+module-margin-right = 0
+
+font-0 = "Monospace:pixelsize=14;1"
+font-1 = "Iosevka Nerd Font:pixelsize=14;1"
+modules-left = appmenu sep bspwm i3 sep prev play-pause skip sep
+modules-center =  sep spotify cmus sep 
+modules-right =  date sep1 pulse sep1 powermenu 
+
+tray-position = none
+tray-padding = 10
+tray-background = ${colors.inactive}
+
+[bar/bar2]
+inherit = bar/bar1
+monitor = DVI-D-0
+
+[module/xwindow]
+type = internal/xwindow
+format-background = ${colors.background}
+format-padding = 1
+label = %title:0:25: ...%
+
+[module/bspwm]
+type = internal/bspwm
+
+ws-icon-0 = 1;
+ws-icon-1 = 2;
+ws-icon-2 = 3;
+ws-icon-3 = 4;
+ws-icon-4 = 5;
+ws-icon-5 = 6;ﭮ
+ws-icon-6 = 7;
+ws-icon-7 = 8;
+ws-icon-8 = 9;
+ws-icon-9 = 10;
+
+label-dimmed-focused-foreground = $(colors.background)
+
+label-focused = %icon%
+label-focused-background = ${colors.highlight}
+label-focused-foreground = ${colors.foreground}
+label-focused-padding = 1
+
+label-occupied = %icon%
+label-occupied-background = ${colors.highlight}
+label-occupied-foreground = ${colors.background}
+label-occupied-padding = 1
+
+label-urgent = %icon%!
+label-urgent-foreground = ${colors.error}
+label-urgent-background = ${colors.highlight}
+label-urgent-padding = 1
+
+label-empty = %icon%
+label-empty-foreground = ${colors.background}
+label-empty-background = ${colors.highlight}
+label-empty-padding = 1
+
+[module/i3]
+type = internal/i3
+index-sort = false
+wrapping-scroll = false
+fuzzy-matching = true
+
+; Only show workspaces on the same output as the bar
+pin-workspaces = true
+
+
+ws-icon-0 = 1;
+ws-icon-1 = 2;
+ws-icon-2 = 3;
+ws-icon-3 = 4;
+ws-icon-4 = 5;5
+ws-icon-5 = 6;ﭮ
+ws-icon-6 = 7;7
+ws-icon-7 = 8;8
+ws-icon-8 = 9;9
+ws-icon-9 = 10;
+#ws-icon-default = 
+
+
+label-mode-foreground = ${colors.background}
+label-mode-background = ${colors.highlight}
+
+label-focused="%icon%"
+label-focused-padding=1
+label-focused-background = ${colors.highlight}
+label-focused-foreground = ${colors.foreground}
+
+label-unfocused="%icon%"
+label-unfocused-padding=1
+label-unfocused-background = ${colors.highlight}
+label-unfocused-foreground = ${colors.background}
+
+label-visible="%icon%"
+label-visible-padding=1
+label-visible-background = ${colors.highlight}
+label-visible-foreground = ${colors.background}
+
+label-urgent="%icon%"
+label-urgent-padding=1
+label-urgent-background = ${colors.error}
+label-urgent-foreground = ${colors.background}
+
+[module/mpd]
+type = internal/mpd
+format-online = <label-song>  <icon-prev> <icon-stop> <toggle> <icon-next>
+
+icon-play = ⏵
+icon-pause = ⏸
+icon-stop = ⏹
+icon-prev = ⏮
+icon-next = ⏭
+
+label-song-maxlen = 25
+label-song-ellipsis = true
+format-playing-padding = 2
+format-playing-background = ${colors.highlight}
+
+[module/wlan]
+type = internal/network
+interface = wlp3s0
+interval = 3.0
+
+format-connected-padding = 1
+format-connected = <ramp-signal> <label-connected>
+label-connected = %essid%
+format-connected-background = ${colors.active}
+
+format-disconnected =
+
+ramp-signal-0 = 
+ramp-signal-foreground = ${colors.foreground}
+
+[module/eth]
+type = internal/network
+interface = enp0s25
+interval = 3.0
+
+format-connected =  <label-connected>
+format-connected-padding = 1
+format-connected-background = ${colors.highlight}
+label-connected = %local_ip%
+
+
+[module/date]
+type = internal/date
+interval = 5
+
+date = "%d %b %Y, "
+time = %H:%M
+
+format-padding = 1
+format-background = ${colors.highlight}
+format-foreground = ${colors.background}
+
+label = %date%%time%
+
+[module/volume]
+type = internal/alsa
+
+format-volume = <ramp-volume> <label-volume>
+format-volume-padding = 1
+format-volume-background = ${colors.active}
+ramp-volume-0 = 
+ramp-volume-1 = 
+ramp-volume-2 = 
+ramp-volume-3 = 
+ramp-volume-foreground = ${colors.foreground}
+
+format-muted-prefix = " "
+format-muted-foreground = ${colors.background}
+format-muted-background = ${colors.error}
+label-muted = MUTED format-muted-padding = 1
+
+[module/battery]
+type = internal/battery
+battery = BAT0
+adapter = ADP1
+full-at = 100
+
+format-charging =   <animation-charging> <label-charging>
+format-charging-padding = 1
+format-discharging-padding = 1
+format-discharging = <ramp-capacity> <label-discharging>
+format-full = <label-full> <ramp-capacity>
+format-full-padding = 1
+format-full-background = ${colors.active}
+
+ramp-capacity-0 = 
+ramp-capacity-1 =  
+ramp-capacity-2 =  
+ramp-capacity-3 = 
+ramp-capacity-4 =  
+ramp-capacity-foreground = ${colors.foreground}
+
+animation-charging-foreground = ${colors.foreground}
+animation-charging-framerate = 500
+animation-charging-0 = 
+animation-charging-1 =  
+animation-charging-2 =  
+animation-charging-3 = 
+animation-charging-4 =  
+format-charging-background = ${colors.highlight}
+format-discharging-background = ${colors.active}
+
+[module/spotify]
+type = custom/script
+interval = 1
+format = 阮 <label>
+exec = python /home/musa/.config/polybar/spotify-polybar.py -f '{artist}: {song}'
+format-underline = #1db954
+
+[module/play-pause]
+type = custom/text
+content = "  "
+click-left = playerctl play-pause
+[module/skip]
+type = custom/text
+content = "嶺"
+click-left = playerctl next
+[module/prev]
+type = custom/text
+content = "寧"
+click-left = playerctl previous
+
+[module/sep]
+type = custom/text
+content = "│"
+
+
+[module/sep1]
+type = custom/text
+content = "│"
+content-background = ${colors.highlight}
+content-foreground = ${colors.background}
+
+[module/pulse]
+type = internal/pulseaudio
+interval = 5
+; Available tags:
+;   <label-volume> (default)
+;   <ramp-volume>
+;   <bar-volume>
+format-volume = <ramp-volume> <label-volume>
+format-volume-alt = <ramp-volume> <label-volume>
+format-volume-background = ${colors.highlight}
+format-volume-foreground = ${colors.background}
+
+; Available tags:
+;   <label-muted> (default)
+;   <ramp-volume>
+;   <bar-volume>
+;format-muted = <label-muted>
+use-ui-max = false
+; Available tokens:
+;   %percentage% (default)
+;   %decibels% (unreleased)
+label-volume = %percentage%%
+
+; Available tokens:
+;   %percentage% (default)
+;   %decibels% (unreleased)
+label-muted =  
+label-muted-foreground = ${colors.foreground}
+label-muted-background = ${colors.background}
+; Only applies if <ramp-volume> is used
+ramp-volume-0 = 
+ramp-volume-1 = 
+ramp-volume-2 = 
+
+; Right and Middle click (unreleased)
+click-right = pavucontrol 
+
+[module/powermenu]
+type = custom/text
+content = " ⏻ "
+content-foreground=${colors.background}
+content-background=${colors.highlight}
+click-left = ~/scripts/powermenu
+[module/appmenu]
+type = custom/text
+content = ""
+content-padding= 1
+content-foreground=${colors.foreground}
+content-background=${colors.background}
+click-left = rofi -theme /home/musa/.cache/wal/colors-rofi-dark.rasi -location 1  -width 20 -yoffset 45 -xoffset 10  -show drun -show-icons
+click-right = rofi -theme /home/musa/.cache/wal/colors-rofi-dark.rasi -location 1  -width 20 -yoffset 45 -xoffset 10  -show run -show-icons
+
+
+[module/cmus]
+type = custom/script
+
+exec = /home/musa/.config/polybar/cmus.sh
+exec-if = pgrep -x cmus
+interval = 1
+
+#click-left = cmus-remote --next
+#click-right = cmus-remote --prev
+#click-middle = cmus-remote --pause
+scroll-up = cmus-remote --volume +5%
+scroll-down = cmus-remote --volume -5%
+
+label-font = 3
+format =  <label>
+format-underline = ${colors.foreground}
+label = %output%
+label-maxlen = 50
+
+[settings]
+screenchange-reload = true
+
+[global/wm]
+margin-top = 5
+margin-bottom = 0
+
+; vim:ft=dosini

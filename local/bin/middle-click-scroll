@@ -1,0 +1,5 @@
+#!/bin/bash
+for i in {1..18}
+do
+	xinput set-prop $i "libinput Scroll Method Enabled" 0, 0, 1
+done
